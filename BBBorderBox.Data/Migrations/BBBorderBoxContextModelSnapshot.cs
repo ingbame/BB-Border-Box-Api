@@ -25,10 +25,7 @@ namespace BBBorderBox.Data.Migrations
             modelBuilder.Entity("BBBorderBox.Entity.WServices.ChatUpdate", b =>
                 {
                     b.Property<long>("UpdateId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UpdateId"), 1L, 1);
 
                     b.Property<long>("AppUserId")
                         .HasColumnType("bigint");

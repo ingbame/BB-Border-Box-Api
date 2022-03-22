@@ -8,6 +8,7 @@
   <ItemGroup>
     <Folder Include="Apps\" />
     <Folder Include="CRM\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>

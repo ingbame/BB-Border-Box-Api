@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BBBorderBox.Data.Migrations
 {
     [DbContext(typeof(BBBorderBoxContext))]
-    [Migration("20220322015516_Inicial2")]
-    partial class Inicial2
+    [Migration("20220322072430_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,10 +27,7 @@ namespace BBBorderBox.Data.Migrations
             modelBuilder.Entity("BBBorderBox.Entity.WServices.ChatUpdate", b =>
                 {
                     b.Property<long>("UpdateId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("UpdateId"), 1L, 1);
 
                     b.Property<long>("AppUserId")
                         .HasColumnType("bigint");

@@ -1,11 +1,7 @@
 ﻿using BBBorderBox.Data.Data;
 using BBBorderBox.Entity.WServices;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace BBBorderBox.Data.WServices.Telegram
 {
@@ -27,30 +23,27 @@ namespace BBBorderBox.Data.WServices.Telegram
                             _instance = new DABotIntegration();
                     }
                 }
-
                 return _instance;
             }
         }
         #endregion
-        public DABotIntegration(BBBorderBoxContext context)
+        private DABotIntegration() : this(new BBBorderBoxContext(new DbContextOptions<BBBorderBoxContext>()))
+        {
+
+        }
+        private DABotIntegration(BBBorderBoxContext context)
         {
             _context = context;
         }
         public async Task<ChatUpdate> GetBotUpdate(long id)
         {
-            using (var dbctx = new BBBorderBoxContext())
-            {
-                var consult = await dbctx.ChatsUpdates.FindAsync(id);
-            }
-            return new ChatUpdate();
+            var consult = await _context.ChatsUpdates.FindAsync(id);
+            return consult;
         }
         public async Task<ChatUpdate> PostUpdateAsync(ChatUpdate model)
         {
-            using (var dbctx = new BBBorderBoxContext())
-            {
-                await dbctx.ChatsUpdates.AddAsync(model);
-                await dbctx.SaveChangesAsync();
-            }
+            await _context.ChatsUpdates.AddAsync(model);
+            await _context.SaveChangesAsync();
             return model;
         }
     }

@@ -17,17 +17,16 @@ namespace BBBorderBox.Data.Migrations
                 schema: "Telegram",
                 columns: table => new
                 {
-                    UpdateId = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UpdateId = table.Column<long>(type: "bigint", nullable: false),
                     MessageId = table.Column<long>(type: "bigint", nullable: false),
-                    Date = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MessageText = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AppUserId = table.Column<long>(type: "bigint", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LanguageCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "VARCHAR(100)", nullable: true),
+                    LastName = table.Column<string>(type: "VARCHAR(100)", nullable: true),
+                    LanguageCode = table.Column<string>(type: "VARCHAR(10)", nullable: true),
                     ChatId = table.Column<long>(type: "bigint", nullable: false),
-                    TypedCommand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypedCommand = table.Column<string>(type: "VARCHAR(20)", nullable: true),
                     ReturnResponse = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NeedHuman = table.Column<bool>(type: "bit", nullable: false),
                     TalkingWithHuman = table.Column<bool>(type: "bit", nullable: false),

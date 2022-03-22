@@ -1,7 +1,11 @@
 ﻿using BBBorderBox.Entity.WServices;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +14,26 @@ namespace BBBorderBox.Data.Data
 {
     public class BBBorderBoxContext : DbContext
     {
-        public BBBorderBoxContext(DbContextOptions<BBBorderBoxContext> options) : base(options) { }
-        public BBBorderBoxContext()
+        public BBBorderBoxContext(DbContextOptions<BBBorderBoxContext> options) : base(options)
         {
         }
+
         public DbSet<ChatUpdate> ChatsUpdates { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                if (!optionsBuilder.IsConfigured)
+                {
+                    IConfigurationRoot configuration = new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json")
+                        .Build();
+                    var connectionString = configuration.GetConnectionString("BBBorderBoxCon");
+                    optionsBuilder.UseSqlServer(connectionString);
+                }
+            }
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Aqui se puede personalizar la creación de las tablas y las relaciones entre ellas
@@ -54,6 +73,7 @@ namespace BBBorderBox.Data.Data
         public ModelBuilder ChatsUpdatesProperties(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ChatUpdate>().HasKey(pk => pk.UpdateId).HasName("PK_ChatsUpdates_UpdateId");
+            modelBuilder.Entity<ChatUpdate>().Property(pk => pk.UpdateId).ValueGeneratedNever();
             modelBuilder.Entity<ChatUpdate>().Property(p => p.FirstName).HasColumnType("VARCHAR(100)");
             modelBuilder.Entity<ChatUpdate>().Property(p => p.LastName).HasColumnType("VARCHAR(100)");
             modelBuilder.Entity<ChatUpdate>().Property(p => p.LanguageCode).HasColumnType("VARCHAR(10)");

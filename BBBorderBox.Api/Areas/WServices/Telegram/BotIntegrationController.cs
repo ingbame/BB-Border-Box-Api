@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BBBorderBox.Core.WServices.Telegram;
+using Microsoft.EntityFrameworkCore;
 
 namespace BBBorderBox.Api.Areas.WServices.Telegram
 {
@@ -27,13 +28,12 @@ namespace BBBorderBox.Api.Areas.WServices.Telegram
                 if (model == null || model.UpdateId == 0)
                     return BadRequest();
                 model = await BotIntegration.Instance.PostBotIntegrationAsync(model);
+                return CreatedAtAction("GetBotUpdate", new { id = model.UpdateId }, model);
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException)
             {
-
-                throw;
+                throw; //500
             }
-            return CreatedAtAction("GetSale", new { id = model.UpdateId }, model);
         }
     }
 }
