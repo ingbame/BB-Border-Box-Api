@@ -1,5 +1,5 @@
 ﻿using BBBorderBox.Data.WServices.Telegram;
-using BBBorderBox.Entity.WServices;
+using BBBorderBox.Entity.Data.Telegram;
 using System;
 using System.Collections.Generic;
 using System.Linq;

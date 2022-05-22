@@ -6,9 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Apps\" />
-    <Folder Include="CRM\" />
+    <Folder Include="Areas\Apps\" />
+    <Folder Include="Areas\Common\" />
+    <Folder Include="Areas\CRM\Sales\" />
+    <Folder Include="Areas\CRM\Shipment\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Areas\" />
+    <Folder Include="Areas\WServices\" />
   </ItemGroup>
 
 </Project>

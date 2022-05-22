@@ -1,4 +1,4 @@
-﻿using BBBorderBox.Entity.WServices;
+﻿using BBBorderBox.Entity.Data.Telegram;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BBBorderBox.Core.WServices.Telegram;
@@ -30,7 +30,7 @@ namespace BBBorderBox.Api.Areas.WServices.Telegram
                 model = await BotIntegration.Instance.PostBotIntegrationAsync(model);
                 return CreatedAtAction("GetBotUpdate", new { id = model.UpdateId }, model);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException es)
             {
                 throw; //500
             }

@@ -1,5 +1,5 @@
 ﻿using BBBorderBox.Data.Data;
-using BBBorderBox.Entity.WServices;
+using BBBorderBox.Entity.Data.Telegram;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
